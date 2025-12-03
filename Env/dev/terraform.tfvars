@@ -1,14 +1,14 @@
 rg_env = {
   rg1={
     rg_name = "tushar-rg"
-    location = "west europe"
+    location = "Austria East"
   }
 }
 
 vn_env = {
   "vn1"={
     nsg_name="tushar-nsg"
-    location = "westeurope"
+    location = "Austria East"
     rg_name ="tushar-rg"
     vn_name="tushar-vn"
 
@@ -31,26 +31,28 @@ vm = {
 
   vm1={
     nic_name="tushar-nic-1"
-    location="westeurope"
+    location="Austria East"
     rg_name ="tushar-rg"
     vm_name ="tushar-vm-1"
     sb_name="tushar-sb1"
     vn_name="tushar-vn"
-     key_name="tushar-vault"
-    secret_name="adminvm"
-    secret_password="adminpassword"
+    key_name="tushar-vaults-03-4"
+    admin_username="adminvm"
+    nsg_name="tushar-nsg"
+    pip_name="pip-frontend"
   }
 
     vm2={
     nic_name="tushar-nic-2"
-    location="westeurope"
+    location="Austria East"
     rg_name ="tushar-rg"
-    vm_name ="tushar-vm-1"
+    vm_name ="tushar-vm-2"
     sb_name="tushar-sb2"
     vn_name="tushar-vn"
-     key_name="tushar-vault"
-     secret_name="adminvm"
-    secret_password="adminpassword"
+    key_name="tushar-vaults-03-4"
+    admin_username="adminvm"
+    nsg_name="tushar-nsg"
+    pip_name="pip-backend"    
   }
 }
 
@@ -58,12 +60,11 @@ mssql_server = {
  mssql1={
   mssql_server_name="tushar-mssql-server"
   rg_name="tushar-rg"
-  location="west Europe"
+  location="Austria East"
   administrator_login="tusharadmin"
   administrator_login_password="tushar@2025"
-  key_name="tushar-vault"
-  secret_name="adminname"
-  secret_password="adminpassword"
+  key_name="tushar-vaults-03-4"
+  server_name="adminserver"
  }
 }
 
@@ -76,8 +77,8 @@ mssql_database = {
 }
 key_vault = {
   valut1={
-    key_name="tushar-vault"
-    location="west europe"
+    key_name="tushar-vaults-03-4"
+    location="Austria East"
     rg_name="tushar-rg"
 
  }
@@ -85,36 +86,37 @@ key_vault = {
 
 secret = {
   ser1={
-    secret_name="adminname"
-    secret_value="adminserver"
+    key_name="tushar-vaults-03-4"
+    secret_name="adminserver"
+    secret_value="admin@123"
     rg_name="tushar-rg"
   }
 
    ser2={
-    secret_name="adminpassword"
+    key_name="tushar-vaults-03-4"
+    secret_name="adminvm"
     secret_value="admin@123"
     rg_name="tushar-rg"
   }
-  
-   ser3={
-    secret_name="adminvm"
-    secret_value="adminuser"
-    rg_name="tushar-rg"
-  }
-
-   ser4={
-    secret_name="adminpassword"
-    secret_value="admin@321"
-    rg_name="tushar-rg"
-  }
-
 
 }
 
 pip = {
  pip1={
   pip_name="pip-load-balancer"
-  location="west europe"
+  location="Austria East"
+  rg_name="tushar-rg"
+ }
+
+  pip2={
+  pip_name="pip-frontend"
+  location="Austria East"
+  rg_name="tushar-rg"
+ }
+
+  pip3={
+  pip_name="pip-backend"
+  location="Austria East"
   rg_name="tushar-rg"
  }
 }
@@ -123,7 +125,7 @@ pip = {
 lb = {
   lb1={
     lb_name="tushar-lb"
-    location="west europe"
+    location="Austria East"
     rg_name="tushar-rg"
     backened_pool_name="tushar-backened-pool"
   }

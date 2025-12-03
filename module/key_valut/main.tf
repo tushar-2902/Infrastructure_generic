@@ -23,12 +23,14 @@ resource "azurerm_key_vault" "example" {
       "Delete",
     ]
 
-    secret_permissions = [
-      "Get",
-      "List",
-      "Set",
-      "Delete",
-    ]
+   secret_permissions = [
+  "Get",
+  "List",
+  "Set",
+  "Delete",
+  "Purge",   # <--- MOST IMPORTANT
+  "Recover"
+]
     storage_permissions = [
       "Get",
       "List",

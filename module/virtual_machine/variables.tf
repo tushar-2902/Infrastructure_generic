@@ -7,7 +7,8 @@ variable "vm" {
     sb_name=string
     vn_name=string
     key_name=string
-    secret_name=string
-    secret_password=string
+    admin_username=string
+    nsg_name=string
+    pip_name=string
   }))
 }

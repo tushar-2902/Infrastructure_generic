@@ -27,10 +27,12 @@ variable "vm" {
     sb_name=string
     vn_name=string
     key_name=string
-    secret_name=string
-    secret_password=string
+    admin_username=string
+    nsg_name=string
+    pip_name=string
   }))
 }
+
 
 variable "mssql_server" {
   type = map(object({
@@ -40,9 +42,7 @@ variable "mssql_server" {
     administrator_login=string
     administrator_login_password=string 
     key_name=string
-    secret_name=string
-    secret_password=string
- 
+    server_name=string
   }))
 }
 
@@ -68,6 +68,7 @@ variable "secret" {
     secret_name=string
     secret_value=string
      rg_name=string
+     key_name=string
   }))
 }
 

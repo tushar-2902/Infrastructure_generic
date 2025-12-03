@@ -8,6 +8,11 @@ resource "azurerm_mssql_database" "example" {
   sku_name     = "S0"
   enclave_type = "VBS"
 
+  storage_account_type = "Local"      # ❗ Use Local or Zone
+  geo_backup_enabled   = false        # ❗ Disable geo backup (restricted)
+
+  transparent_data_encryption_enabled = true
+
 
 }
 

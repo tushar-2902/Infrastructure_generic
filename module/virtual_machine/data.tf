@@ -11,14 +11,20 @@ data "azurerm_key_vault" "kv" {
   resource_group_name = each.value.rg_name
 }
 
-data "azurerm_key_vault_secret" "vm_name" {
+data "azurerm_key_vault_secret" "vm_detail" {
   for_each =  var.vm
-  name         = each.value.secret_name
+  name         = each.value.admin_username
   key_vault_id = data.azurerm_key_vault.kv[each.key].id
 }
 
-data "azurerm_key_vault_secret" "vm_password" {
-  for_each =  var.vm
-  name         = each.value.secret_password
-  key_vault_id = data.azurerm_key_vault.kv[each.key].id
+data "azurerm_network_security_group" "nsg" {
+  for_each = var.vm
+  name                = each.value.nsg_name
+  resource_group_name = each.value.rg_name
+}
+
+data "azurerm_public_ip" "example" {
+  for_each = var.vm
+  name                = each.value.pip_name  
+  resource_group_name = "tushar-rg"               
 }
