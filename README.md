@@ -1,137 +1,132 @@
+<!-- 🌟 3D Styled Header Banner -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rounded&color=0A66C2&height=190&fontSize=38&fontColor=FFFFFF&text=Generic%20Azure%20Infrastructure%20Modules&animation=fadeIn&desc=Reusable%20Terraform%20Modules%20for%20Production%20Azure%20Setups&descSize=18&descAlign=50&descAlignY=70"/>
+  <img src="https://capsule-render.vercel.app/api?type=rounded&color=232F3E&height=190&fontSize=38&fontColor=FFFFFF&text=AWS%20EC2%20with%20Elastic%20IP%20%7C%20Terraform&animation=fadeIn&desc=Infrastructure%20as%20Code%20%7C%20Static%20Public%20IP%20Automation%20%7C%20AWS&descSize=18&descAlign=50&descAlignY=72"/>
 </p>
 
+<!-- ⌨️ Typing Animation -->
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&pause=1000&color=5C4EE5&center=true&vCenter=true&width=850&lines=Terraform+Azure+Modules;Reusable+Infrastructure+Components;Production+Ready+IaC;DevOps+Best+Practices" />
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=22&pause=1000&color=FF9900&center=true&vCenter=true&width=900&lines=Terraform+on+AWS;EC2+Provisioning+with+Elastic+IP;Static+Public+IP+Automation;DevOps+IaC+Project" />
 </p>
 
+<!-- 🔰 Badges -->
 <p align="center">
-  <img src="https://img.shields.io/badge/Cloud-Azure-0078D4?style=for-the-badge&logo=microsoftazure&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Tool-Terraform-5C4EE5?style=for-the-badge&logo=terraform&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Architecture-Modular-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/IaC-Production%20Ready-green?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Cloud-AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=FF9900"/>
+  <img src="https://img.shields.io/badge/Service-EC2-orange?style=for-the-badge&logo=amazonec2&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Network-Elastic%20IP-blue?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/IaC-Terraform-5C4EE5?style=for-the-badge&logo=terraform&logoColor=white"/>
 </p>
 
 ---
 
-## 🚀 Overview
+## 🚀 Project Overview
 
-This repository contains **generic, reusable Terraform modules** for provisioning **Microsoft Azure infrastructure**.  
-The goal of this project is to provide **production-ready building blocks** that can be reused across multiple environments like **dev, test, staging, and prod**.
+This project demonstrates **provisioning an AWS EC2 instance with an Elastic IP (EIP)** using **Terraform**.  
+Elastic IP provides a **static public IPv4 address**, ensuring consistent connectivity even after instance restarts.
 
-Each module is **independent, cleanly structured, and designed using Terraform best practices**.
-
----
-
-## 🧱 Modules Included
-
-```text
-✔ Resource Group
-✔ Virtual Network
-✔ Public IP
-✔ Virtual Machine
-✔ Load Balancer
-✔ Load Balancer Association
-✔ Azure SQL Server
-✔ Azure SQL Database
-✔ Azure Key Vault
-✔ Key Vault Secrets
-```
+The project follows **Infrastructure as Code (IaC)** principles and reflects a **real-world DevOps automation use case**.
 
 ---
 
-## 📁 Repository Structure
+## 🧩 Components Provisioned
+
+- 🖥️ AWS EC2 Instance  
+- 🌐 Elastic IP (VPC scoped)  
+- 🔗 Elastic IP association with EC2  
+- 🏷️ Resource tagging using Terraform  
+- ⚙️ AWS Provider configuration  
+
+---
+
+## 📂 Repository Structure
 
 ```bash
-Infrastructure_generic/
-├── Env/                         # Environment-specific configurations
-└── module/
-    ├── resource_group/
-    ├── virtual_network/
-    ├── public_ip/
-    ├── virtual_machine/
-    ├── loadbalancer/
-    ├── load_association/
-    ├── mssql_server/
-    ├── mssql_database/
-    ├── key_vault/
-    └── key_secret/
+aws_folder/
+├── EC2_instances/
+│   ├── EC2.tf
+│   └── provider.tf
+├── elastic_ip/
+│   ├── elastic_ip.tf
+│   ├── association_eip.tf
+│   ├── ec2.tf
+│   ├── provider.tf
+│   └── terraform.tfstate
+└── README.md
 ```
 
 ---
 
-## ⚙️ Design Principles
-
-- 🔹 **Modular Terraform design**
-- 🔹 Reusable across multiple projects
-- 🔹 Clean variable definitions & outputs
-- 🔹 Environment-agnostic modules
-- 🔹 Supports CI/CD & GitOps workflows
-- 🔹 Follows Azure naming & security best practices
-
----
-
-## 🧠 Example Usage
+## ⚙️ Key Terraform Snippets
 
 ```hcl
-module "rg" {
-  source   = "../module/resource_group"
-  rg_name  = "prod-rg"
-  location = "West Europe"
-}
+resource "aws_eip" "static_ip" {
+  domain = "vpc"
 
-module "vnet" {
-  source   = "../module/virtual_network"
-  vnet_name = "prod-vnet"
-  rg_name   = module.rg.rg_name
+  tags = {
+    Name = "tushar-elastic-ip"
+  }
+}
+```
+
+```hcl
+resource "aws_eip_association" "attach_eip" {
+  instance_id   = aws_instance.example.id
+  allocation_id = aws_eip.static_ip.id
 }
 ```
 
 ---
 
-## 🏗️ Conceptual Architecture (3D Flow)
+## 🏗️ Architecture Flow
 
 ```mermaid
 graph TD
-    A[Terraform CLI] --> B[Azure Provider]
-    B --> C[Resource Group]
-    C --> D[Virtual Network]
-    D --> E[Subnets]
-    E --> F[Virtual Machines]
-    F --> G[Load Balancer]
-    G --> H[Backend Pool]
-    C --> I[Azure SQL Server]
-    I --> J[SQL Database]
-    C --> K[Key Vault]
+    A[Terraform CLI] --> B[AWS Provider]
+    B --> C[EC2 Instance 🖥️]
+    B --> D[Elastic IP 🌐]
+    D --> E[EIP Association 🔗]
+    E --> C
 ```
 
 ---
 
-## 🔐 Security & Best Practices
+## 🧪 How to Run
 
-- Secrets managed via **Azure Key Vault**
-- No hardcoded credentials
-- `.tfstate` handled per environment
-- Ready for **remote backend integration**
-- Suitable for enterprise Azure Landing Zones
+```bash
+# Configure AWS credentials
+aws configure
+
+# Initialize Terraform
+terraform init
+
+# Validate configuration
+terraform validate
+
+# Review execution plan
+terraform plan
+
+# Create infrastructure
+terraform apply -auto-approve
+
+# Cleanup resources (optional)
+terraform destroy -auto-approve
+```
 
 ---
 
-## 📌 Use Cases
+## 🛡️ Best Practices Followed
 
-- Enterprise Azure projects
-- DevOps automation pipelines
-- Azure Landing Zone foundations
-- Reusable Terraform library
-- Interview & portfolio projects
+- Infrastructure as Code (IaC)
+- Separation of resources into logical files
+- Static public IP allocation using Elastic IP
+- Clean, readable Terraform configuration
+- Suitable for CI/CD & automation pipelines
 
 ---
 
 ## 👨‍💻 Author
 
 **Tushar Mishra**  
-DevOps Engineer | Azure | Terraform  
+DevOps Engineer | AWS | Terraform  
 📧 Email: tusharmishra2902@gmail.com  
 🔗 LinkedIn: https://linkedin.com/in/tushar-mishra-02461235a  
 🐙 GitHub: https://github.com/tushar-2902  
@@ -140,7 +135,10 @@ DevOps Engineer | Azure | Terraform
 
 ## 📜 License
 
-This project is licensed under the **MIT License**.
+Licensed under the **MIT License**.
 
 ---
 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=232F3E&height=110&section=footer"/>
+</p>
